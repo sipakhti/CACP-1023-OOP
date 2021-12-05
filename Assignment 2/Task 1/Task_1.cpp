@@ -16,10 +16,10 @@ public:
     /**
      * @brief Construct a new Circle object
      * 
-     * @param r radius of the circle (default is 0)
+     * @param _radius radius of the circle (default is 0)
      */
-    Circle(double r=0){
-        radius = r > 0 ? r : 0;
+    Circle(double _radius=0){
+        radius = _radius > 0 ? _radius : 0;
         cout << "Constructor Called!" << endl;
         Circle::incrementCount();
     };
@@ -38,7 +38,6 @@ public:
 
     /**
      * @brief prints the area of the circle
-     * 
      */
     void area(){
         cout << "Approximate Area =~ " << radius * radius * PI << endl;
@@ -48,6 +47,10 @@ public:
     double getRadius(){
         return radius;
     };
+
+    void setRadius(double val){
+        radius = val > 0 ? val : 1;
+    }
 
     //------------------------------------------------------OVERLOADED OPERATORS------------------------------------------------------//
 
@@ -93,14 +96,14 @@ public:
         return radius == c2.radius;
     };
     // -------------------------------------------------------------OVERLOADED STREAM OPERATORS------------------------------------------------------//
-    friend ostream& operator<<(ostream& out, Circle& circle){
-        out << "Radius: " << circle.radius << endl;
-        return out;
-    };
-    friend istream& operator>>(istream& in, Circle& circle){
-        in >> circle.radius;
-        return in;
-    };
+    // friend ostream& operator<<(ostream& out, Circle& circle){
+    //     out << "Radius: " << circle.radius << endl;
+    //     return out;
+    // };
+    // friend istream& operator>>(istream& in, Circle& circle){
+    //     in >> circle.radius;
+    //     return in;
+    // };
 
     //------------------------------------------------------END OF OVERLOADED OPERATORS------------------------------------------------------//
     //------------------------------------------------------STATIC METHODS------------------------------------------------------//
@@ -130,12 +133,16 @@ public:
 
 
 };
-
-// istream& operator>>(istream& in, Circle& circle){
-//     in >> circle.getRadius();
-//     return in;
-// };
-
+ostream& operator<<(ostream& out, Circle& circle){
+    out << "Radius: " << circle.getRadius() << endl;
+    return out;
+};
+istream& operator>>(istream& in, Circle& circle){
+    double temp;
+    in >> temp;
+    circle.setRadius(temp);
+    return in;
+};
 
 int main()
 {
@@ -156,5 +163,6 @@ int main()
     ++++obj1; //Do check if we do not return circle by reference than what happens?
     obj1.area();
     cout << (obj1 < obj2 ? "True" : "False") << endl;
+    // cout << obj1 << obj2 << obj3 << obj4;
     return 0;
 }
