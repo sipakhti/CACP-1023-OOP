@@ -202,26 +202,26 @@ class Teacher : public Person {
     // -------------------------------------------------- END OF OPERATORS -------------------------------------------------- //
 };
 
-ostream& operator<<(ostream& os, const Person& p){
-    os << "Name: " << p.getName() << endl;
-    os << "Phone: " << p.getPhone() << endl;
-    os << "Email: " << p.getEmail() << endl;
-    os << "Age: " << p.getAge() << endl;
+ostream& operator<<(ostream& os, const Person& person){
+    os << "Name: " << person.getName() << endl;
+    os << "Phone: " << person.getPhone() << endl;
+    os << "Email: " << person.getEmail() << endl;
+    os << "Age: " << person.getAge() << endl;
     return os;
 }
 
-ostream& operator<<(ostream& os, const Student& s){
-    os << (Person)s;
-    os << "Registration ID: " << s.getRegistrationID() << endl;
-    os << "Department: " << s.getDepartment() << endl;
-    os << "Completed Credits: " << s.getCompletedCredits() << endl;
+ostream& operator<<(ostream& os, const Student& student){
+    os << (Person)student;
+    os << "Registration ID: " << student.getRegistrationID() << endl;
+    os << "Department: " << student.getDepartment() << endl;
+    os << "Completed Credits: " << student.getCompletedCredits() << endl;
     return os;
 }
 
-ostream& operator<<(ostream& os, const Teacher& t){
-    os << (Person)t;
-    os << "Staff ID: " << t.getStaffID() << endl;
-    os << "Salary: " << t.getSalary() << endl;
+ostream& operator<<(ostream& os, const Teacher& teacher){
+    os << (Person)teacher;
+    os << "Staff ID: " << teacher.getStaffID() << endl;
+    os << "Salary: " << teacher.getSalary() << endl;
     return os;
 }
 
