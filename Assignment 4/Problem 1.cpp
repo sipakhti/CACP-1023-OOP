@@ -4,26 +4,26 @@
 using namespace std;
 
 class GeometricShape {
-    private:
+    protected:
         mutable char* shapeName;
 
-        void copyStr(const char* source, char* target) const {
+        char* copyStr(const char* source, char* target) const {
             if (source == nullptr) 
                 target = nullptr;
             else {
                 int size = strlen(source);
-                if (target == nullptr)
-                    target = new char[size + + 1];
-                else
+                if (target != nullptr)
                     delete[] target;
                 
+                target = new char[size + 1];
                 for (size_t i = 0; i < size; i++)
                     target[i] = source[i];
                 target[size] = '\0';
             }
+            return target;
         }
     public:
-    GeometricShape(const char* _shapeName = nullptr) {
+    GeometricShape(const char* _shapeName = nullptr) : shapeName(nullptr){
         setName(_shapeName);
     }
 
@@ -31,14 +31,19 @@ class GeometricShape {
         setName(other.shapeName);
     }
 
-    void setName(const char* _shapeName) const {
-        copyStr(_shapeName, shapeName);
+    ~GeometricShape() {
+        if (shapeName != nullptr)
+            delete[] shapeName;
     }
 
-    char* getName() const {
-        char* temp = nullptr;
-        copyStr(shapeName, temp);
-        return temp;
+    GeometricShape& operator=(const GeometricShape& other) {
+        setName(other.shapeName);
+        cout << "Assignment operator called" << endl;
+        return *this;
+    }
+
+    void setName(const char* _shapeName) const {
+        shapeName = copyStr(_shapeName, shapeName);
     }
     
 };
@@ -100,7 +105,22 @@ class Trigon : public GeometricShape {
     }
 
     void displayArea() const {
-        cout << "Area of " << getName() << " is " << getArea() << endl;
+        cout << "Area of " << shapeName << " is " << getArea() << endl;
     }
 };
 
+// demo main for testing
+int main() {
+    Trigon t1;
+    t1.setName("Triangle");
+    t1.setBase(2.0);
+    t1.setHeight(3.0);
+    t1.setPrependicular(4.0);
+    t1.displayArea();
+    Trigon t2(20.0, 15.0, 78.0, "Triangle 2");
+    t2.displayArea();
+    Trigon t3;
+    t3 = t2;
+    system("pause");
+    return 0;
+}
