@@ -5,8 +5,8 @@ using namespace std;
 class Animal {
     int age;
     public:
-    Animal(int age) {
-        this->age = age;
+    Animal(int _age) {
+        this->age = _age;
         cout << "Animal constructor" << endl;
     }
     ~Animal() {
@@ -17,8 +17,8 @@ class Animal {
 class Mammal : public Animal {
     int weight;
     public:
-    Mammal(int age, int weight) : Animal(age) {
-        this->weight = weight;
+    Mammal(int _age, int _weight) : Animal(_age) {
+        this->weight = _weight;
         cout << "Mammal constructor" << endl;
     }
     ~Mammal() {
@@ -29,8 +29,8 @@ class Mammal : public Animal {
 class Cat : public Mammal {
     int lives;
     public:
-    Cat(int age, int weight, int lives) : Mammal(age, weight) {
-        this->lives = lives;
+    Cat(int _age, int _weight, int _lives) : Mammal(_age, _weight) {
+        this->lives = _lives;
         cout << "Cat constructor" << endl;
     }
     ~Cat() {
